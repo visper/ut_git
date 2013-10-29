@@ -8,6 +8,8 @@
 
 #define false 0
 #define true 1
+#define ARRAY_SIZE(a) ((sizeof(a))/(sizeof(a[0])))
+
 typedef int bool;
 
 int foo(void)
@@ -29,8 +31,10 @@ void input_int(void)//t1
 
   //check if input nothing or "0"
   int num_count = 0;
-  int in_zero = ((sizeof(str))/(sizeof(str[0]))) - 1;
-  for(int i = 0; i < ((sizeof(str))/(sizeof(str[0]))); i++){
+  //  int in_zero = ((sizeof(str))/(sizeof(str[0]))) - 1;
+  int in_zero = ARRAY_SIZE(str) - 1;
+  //  for(int i = 0; i < ((sizeof(str))/(sizeof(str[0]))); i++){
+  for(int i = 0; i < ARRAY_SIZE(str); i++){
     if(str[i] == '0') ++num_count;
     if(num_count == in_zero){
       CU_FAIL("nothing wasn`t input");
@@ -42,9 +46,11 @@ void input_int(void)//t1
   int counts = 0;
   char nums[] = {'0','1','2','3','4','5','6','7','8','9',','};
   for(int i = 0; i < ((sizeof(str))/(sizeof(str[0]))); i++){
+  //  for(int i = 0; i < ARRAY_SIZE(str); i++){
     if(done) break;
     counts = 0;
-    for (int j = 0; j < ((sizeof(nums))/(sizeof(nums[0]))); j++){
+    //    for (int j = 0; j < ((sizeof(nums))/(sizeof(nums[0]))); j++){
+    for (int j = 0; j < ARRAY_SIZE(nums); j++){
       if(str[i] != nums[j]){
 	++counts;
 	if(counts == len){
@@ -66,7 +72,8 @@ void input_int(void)//t1
   bool ddouble = 0;
   int elmass_coma = 0;
   
-  for(int i = 0; i < ((sizeof(str))/(sizeof(str[0]))); i++){
+  //  for(int i = 0; i < ((sizeof(str))/(sizeof(str[0]))); i++){
+  for(int i = 0; i < ARRAY_SIZE(str); i++){
     if(str[i] == ',' || str[i] == '.'){
       //this line not printed
       CU_PASS("input is double it will be converted");
